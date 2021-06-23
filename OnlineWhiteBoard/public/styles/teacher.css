@@ -1,0 +1,358 @@
+/*scrollbar*/
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1); 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+body,html{
+    width: 100%;
+    height: 100%;
+    margin : 0;
+    box-sizing: border-box;
+    font-family: 'Roboto',sans-serif;
+    user-select: none;
+  }
+#load{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top:0px;
+    left:0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index:999;
+}
+/*afer login*/
+#after-login{
+    width: 100%;
+    height: 100%;
+}
+#header{
+    background-color: #039BE5;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+#title{
+    display: inline-block;
+    font-size : xx-large;
+    font-style: bold;
+    width: min-content;
+    color: white;
+    padding: 20px;
+}
+#space{
+    flex-grow: 5;
+}
+#user-related{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#profile-img{
+  display: inline-block;
+  background-image: url('../images/profileicon.png');
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
+  background-size: 40px;
+  border-radius: 20px;
+}
+#user-name{
+    display: inline-block;
+    font-size: medium;
+    color: white;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:initial;
+    max-width: 150px;
+    padding : 20px;
+}
+#sign-out-button{
+    color:white;
+    border-radius: 5px;
+    background-color: #ff8000;  
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-top:20px;
+}
+
+/*main panel*/
+#main-panel{
+ width : 100%;
+}
+
+#create-class-btn{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color:#ff8000;
+    z-index: 5;
+}
+/*create-class-dialog,add student, remove student,start class prompt,paint tools container*/
+#create-class,#add-student,#remove-student,#start-class-prompt,#paint-tools-container{
+    position: fixed;
+    top:0px;
+    left:0px;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    z-index: 215;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#class-creation,#student-add,#student-remove,#prompt-start-class,#container-paint-tools{
+    width: initial;
+    max-width: 250px;
+    background-color: white;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1),-2px -2px 10px rgba(0, 0, 0, 0.1);
+    padding:20px 30px;
+    border-radius: 10px;
+}
+#creation-action-btns,#add-action-btns,#remove-action-btns,#start-class-prompt-btns,#paint-tools-btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+#cancel-creation,#confirm-creation,#cancel-add,#confirm-add,#cancel-remove,#confirm-remove,#cancel-start,#confirm-start,#confirm-tools-selection{
+    color:#039BE5;
+}
+#container-paint-tools>label , #container-paint-tools>input{
+cursor: pointer;
+}
+#error,#add-error,#remove-error{
+    width: initial;
+    display: inline-block;
+    color:red;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+/*classes*/
+#class-cards-container{
+    display : flex;
+    flex-flow :row wrap;
+    align-items: center;
+    justify-content:flex-start;
+}
+
+.class-card{
+    width: 250px;
+    margin:25px;
+}
+.class-card-title{
+    background-color: #039BE5;
+    padding:16px;
+    color: white; 
+    font-size: large;
+    text-align: center;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.item-container{
+    padding:10px;
+    display: flex;
+    align-items: center;
+}
+.item{
+    font-size: small;
+    display: inline-block;
+    padding:8px;
+}
+
+/*students list section,attendance*/
+#students-list-section-container,#attend-report-container{
+ width: 100%;   
+ height: 100%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ position: fixed;
+ background-color: rgba(0, 0, 0, 0.5);
+ z-index: 210;
+ top: 0;
+ left: 0;
+}
+.students-list-section,.attend-report-section{
+    border-radius: 10px;
+    background-color: white;
+    position: relative;
+    width: 95%;
+    height: 95%;
+    overflow: auto;
+}
+.students-list-header,.attend-report-header,#messages-container-header{
+    background-color: #039BE5;
+    color: white;
+    display: flex;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+.students-list-header-title,.attend-report-header-title,#messages-container-header-title{
+    padding: 20px;
+    font-size: large;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+#students-list-close,#attend-report-close,#messages-container-minimize{
+    background-color: #039BE5;
+    margin: 10px;
+    color: white;
+}
+#student-list-action-buttons,#attend-report-action-buttons{
+    display: inline-block;
+    padding: 5px;
+    width: initial;
+    height: initial;
+    right:0px;
+    bottom:0px;
+    position: absolute;
+    z-index: 212;
+}
+#add-student-btn,#remove-student-btn,#attend-report-download-btn{
+    background-color: #ff8000;
+    color:white;
+    margin: 10px;
+}
+
+
+#student-table-container,#attend-report-table-container{
+    display: inline-block;
+    margin:20px;
+    scroll-behavior:smooth;
+    overflow: auto;
+    padding: 5px;
+    height: 65%;
+    max-width: 85%;
+}
+#student-table ,#attend-report-table{
+    border-collapse: collapse;
+  }
+  #student-table td, #student-table th,#attend-report-table td,#attend-report-table th{
+    border: 1px solid gray;
+    padding: 10px;
+    user-select:all;
+  }
+  #student-table tr,#attend-report-table tr{background-color:whitesmoke;}
+  #student-table td,#attend-report-table td{text-align: left;}
+  
+  #student-table th,#attend-report-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #039BE5;
+    color: white;
+  }
+
+#class-started{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+    top:0px;
+    left:0px;
+    background-color: whitesmoke;
+    z-index:250;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#drawing-canvas{
+    border: 2px solid blue;
+    background-color: white;
+    margin : 2%;
+    cursor: crosshair;
+}
+
+#top-bar{
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+    margin: 10px;
+    z-index: 255;
+    background-color: white;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+}
+.bar-item{
+    width: min-content;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#messages-container{
+    min-width: 250px;
+    width: 300px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    border-radius: 10px;
+    background-color: rgb(251, 251, 251);
+    bottom:0;
+    right:0;
+    margin: 10px;
+    z-index: 254;
+}
+#message-list-container{
+    width: 100%;
+    overflow: auto;
+    flex-grow: 4;
+    display: flex;
+    flex-direction: column;
+}
+#message-input-container{
+    border-top: 1px solid gray;
+    display: flex;
+    flex-flow: row nowrap;
+    padding:0px 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+.message-element{
+    width: calc(100%-30px);
+    margin: 10px 15px;
+    word-wrap: break-word;
+    word-break: break-all;
+    background-color: white;
+    border-radius: 5px;
+}
+.message-author{
+    color: gray;
+    font-size: small;
+    padding: 5px;
+}
+.message-text{
+    color: black;
+    font-size: medium;
+    padding: 5px;
+}

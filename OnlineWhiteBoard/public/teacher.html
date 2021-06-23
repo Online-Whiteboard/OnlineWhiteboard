@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Online Whiteboard</title>
+
+    <!--Material Design Lite-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-pink.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <!--Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css"/>
+
+
+    <link rel="stylesheet" href="styles/teacher.css"/>
+  </head>
+  <body>
+    <!--load-->
+    <section id="load" hidden>
+      <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+    </section>
+    <!--after login-->
+    <section id="after-login" hidden>
+      <!--header-->
+      <div id="header">
+        <span id="title">Online&nbsp;Whiteboard</span>
+        <div id="space"></div>
+        <span id="user-related">
+          <span id="profile-img"></span>
+          <span id="user-name">Name</span>
+        </span>
+        <button id="sign-out-button" class="mdl-button--raised mdl-button mdl-js-button mdl-js-ripple-effect">Sign Out</button>
+      </div>
+      <!--Main-->
+      <div id="main-panel">
+        <!-- fab button to create class -->
+        <button id="create-class-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+          <i class="material-icons">add</i>
+        </button>
+        <!--create class-->
+        <div id="create-class" hidden>
+          <div id="class-creation">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="class-name" name="class-name">
+              <label class="mdl-textfield__label" for="class-name">Class Name</label>
+            </div>
+            <div>
+              <input type="radio" name="gender" value="M" id="male">Male</input>
+              <input type="radio" name="gender" value="F" id="female">Female</input>
+            </div>
+            <span id="error" class="error"></span>
+            <div id="creation-action-btns">
+              <button id="cancel-creation" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                cancel
+              </button>
+              <button id="confirm-creation" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                Create
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="class-cards-container">
+          <!--This is a container for class cards-->
+        </div>
+      </div>
+    </section>
+
+    <!--Class card template-->
+    <div id="class-card-template" hidden>
+      <div class="class-card mdl-shadow--4dp">
+        <div class="class-card-title">kladsjlssdafsafadsfasdfdfasfsafsaksadjfl</div>
+        <div class="class-start-container item-container mdl-js-ripple-effect mdl-button mdl-js-button" style="color:rgb(255, 145, 0)">
+          <span class="material-icons">present_to_all</span>
+          <span class="class-start item">  Start</span>
+        </div>
+        <div class="class-students-container item-container mdl-js-ripple-effect mdl-button mdl-js-button" style="color: #066b9d;">
+          <span class="material-icons">groups</span>
+          <span class="class-students-list item">  Manage students</span>
+        </div>
+        <div class="class-attendance-container item-container mdl-js-ripple-effect mdl-button mdl-js-button" style="color:green">
+          <span class="material-icons">fact_check</span>
+          <span class="class-attendance item">  Attendance report</span>
+        </div>
+        <div class ="class-code-container item-container mdl-js-ripple-effect mdl-button mdl-js-button">
+          <span class="material-icons" style="color:grey">content_copy</span>
+          <span class="class-code-visible item" style="color:grey">  Copy class code</span>
+          <input type="hidden" value="asdfkjlijljljljlkjlkjlkjljlkjljljjzdkxlc;kjsadhfkjsdfjsad" disabled></input>
+        </div>
+        <div class="item-container mdl-js-ripple-effect mdl-button mdl-js-button" hidden>
+          <span class="material-icons" style="color:grey">done</span>
+          <span class="item" style="color:grey">  Copied</span>
+        </div>
+      </div>
+    </div>
+    <!--Attendance Report container-->
+    <!--<div id="attend-report-container">
+      <div class="attend-report-section">
+          <div class="attend-report-header">
+            <span id="attend-report-header-title" class="attend-report-header-title"></span>
+            <button id="attend-report-close" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+              <span class="material-icons">close</span>
+            </button>
+          </div>
+          <div style="padding: 10px;color: gray;">
+            <span>Attendance notifications sent : </span><span id="max-counter"></span><br/>
+            <span>Mark attendance if responded : </span>
+            <select id="response-counter" style="border : 2px solid gray"></select>
+          </div>  
+          <span id="attend-report-action-buttons">
+            <button id="attend-report-download-btn" class=" mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect md1-button--colored">
+              <i class="material-icons">download</i>
+            </button>
+          </span>
+          <span id="attend-report-table-container"><table id="attend-report-table">
+            <tr id="attend-report-meta-data" hidden>
+              <th><b>Classname</b></th>
+              <td id="attend-report-class-name"></td>
+              <th><b>Date & time</b></th>
+              <td id="attend-report-date"></td>
+              <td></td>
+            </tr>
+              <tr>
+                <th><b>Responses</b></th>
+                <th><b>Roll Number</b></th>
+                <th><b>Status</b></th>
+                <th><b>Name</b></th>
+                <th><b>Gmail</b></th>
+              </tr>
+            <tbody id="attend-report-data">
+            </tbody>
+          </table></span>
+      </div>
+    </div>-->
+
+    <!--Students list container
+    <div id="students-list-section-container" hidden>
+      <div class="students-list-section">
+          <div class="students-list-header">
+            <span id="students-list-header-title" class="students-list-header-title"></span>
+            <button id="students-list-close" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+              <span class="material-icons">close</span>
+            </button>
+          </div>
+          <span id="student-list-action-buttons">
+            <button id="add-student-btn" class=" mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect md1-button--colored">
+              <i class="material-icons">person_add_alt_1</i>
+            </button><br/>
+            <button id="remove-student-btn" class=" mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect md1-button--colored">
+              <i class="material-icons">person_remove</i>
+            </button>
+          </span>
+          <span id="student-table-container"><table id="student-table" hidden>
+            <thead><tr><th>Roll Number</th><th>Gmail</th></tr></thead>
+            <tbody id="student-list-data">
+
+            </tbody>
+          </table></span>
+      </div>
+    </div>-->
+
+    <!--add student-->
+    <div id="add-student" hidden>
+      <div id="student-add">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="number" id="roll-add">
+          <label class="mdl-textfield__label" for="roll-add">Roll number</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" id="gmail-id-add">
+          <label class="mdl-textfield__label" for="gmail-id-add">Student G-mail</label>
+        </div>
+        <span id="add-error"></span>
+        <div id="add-action-btns">
+          <button id="cancel-add" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+            cancel
+          </button>
+          <button id="confirm-add" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+    <!--remove student-->
+    <div id="remove-student" hidden>
+      <div id="student-remove">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="number" id="roll-remove">
+          <label class="mdl-textfield__label" for="roll-remove">Roll number</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" id="gmail-id-remove">
+          <label class="mdl-textfield__label" for="gmail-id-remove">Student G-mail</label>
+        </div>
+        <span id="remove-error"></span>
+        <div id="remove-action-btns">
+          <button id="cancel-remove" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+            cancel
+          </button>
+          <button id="confirm-remove" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="start-class-prompt" hidden>
+      <div id="prompt-start-class">
+        <input type="checkbox" id="clear-counters">Reset attendance responses<br/>(select this if you are starting a new session.)</input>
+        <div id="start-class-prompt-btns">
+          <button id="cancel-start" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+            cancel
+          </button>
+          <button id="confirm-start" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+            start
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="paint-tools-container" style="z-index:290;" hidden>
+      <div id="container-paint-tools">
+          <input type="radio" name="color-selection" value="white" id="color-white">
+          <label for="color-white">Eraser</label><br>
+          <label style="display: inline-block;padding: 5px;font-weight: 600;">Size</label><br>
+          <input type="radio" name="brush-size" value="1" id="size-1">
+          <label for="size-1">1</label>
+          <input type="radio" name="brush-size" value="2" id="size-2">
+          <label for="size-2">2</label>
+          <input type="radio" name="brush-size" value="3" id="size-3">
+          <label for="size-3">3</label> <br>
+          <input type="radio" name="brush-size" value="4" id="size-4">
+          <label for="size-4">4</label>
+          <input type="radio" name="brush-size" value="5" id="size-5">
+          <label for="size-5">5</label>
+          <input type="radio" name="brush-size" value="6" id="size-6">
+          <label for="size-6">6</label><br>
+
+          <label style="display: inline-block;padding: 5px;font-weight: 600;">Color</label><br>
+          <input type="radio" name="color-selection" value="red" id="color-red">
+          <label for="color-red">Red</label>
+          <input type="radio" name="color-selection" value="green" id="color-green">
+          <label for="color-green">Green</label><br>
+          <input type="radio" name="color-selection" value="blue" id="color-blue">
+          <label for="color-blue">Blue</label>
+          <input type="radio" name="color-selection" value="black" id="color-black">
+          <label for="color-black">Black</label><br>
+          <div id="paint-tools-btns" style="justify-content: center;">
+            <button id="confirm-tools-selection" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+              Ok
+            </button>
+          </div>
+      </div>
+    </div>
+
+    <!--class started-->
+    <!--<div id="class-started">
+      <canvas id="drawing-canvas"></canvas>
+      <div id="top-bar" class="mdl-shadow--4dp">
+        <div id="session-close" class="mdl-js-ripple-effect mdl-button mdl-js-button bar-item" title="End session">
+          <span class="material-icons ">
+            close
+          </span>
+        </div>
+        <div id="open-chat" class="mdl-js-ripple-effect mdl-button mdl-js-button bar-item" title="chat" style="color: orange;">
+          <span class="material-icons ">
+            chat_bubble_outline
+          </span>
+        </div>
+        <div id="open-unread-chat" class="mdl-js-ripple-effect mdl-button mdl-js-button bar-item" style="color:orange;" title="unread messages" hidden>
+          <span class="material-icons">
+            mark_chat_unread
+          </span>
+        </div>
+        <div id="clear-canvas" class="mdl-js-ripple-effect mdl-button mdl-js-button bar-item" style="color: red;" title="clear canvas">
+          <span class="material-icons">
+            delete
+          </span>
+        </div>
+        <div id="send-attendance-notification" class="mdl-js-ripple-effect mdl-button mdl-js-button bar-item" style="color: green;" title="send attendance notification">
+          <span style="font-size: large;">
+            A
+          </span>
+          <span class="material-icons">
+            check_circle
+            </span>
+        </div>
+        <div id="paint-tools" class="mdl-js-ripple-effect mdl-button mdl-js-button bar-item" style="color:blue;" title="paint tools">
+          <span class="material-icons">
+            brush
+          </span>
+        </div>
+      </div>
+      <div id="messages-container" class="mdl-shadow--4dp" hidden>
+        <div id="messages-container-header">
+          <span id="messages-container-header-title"></span>
+          <button id="messages-container-minimize" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div id="message-list-container">
+
+        </div>
+        <div id="message-input-container">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <textarea class="mdl-textfield__input" type="text" id="message-input-text" rows="1" style="resize: none;"></textarea>
+            <label class="mdl-textfield__label" for="message-input-text">Enter your message</label>
+          </div>
+          <button id="messages-input-send-btn" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color:#039be5">
+            <span class="material-icons">send</span>
+          </button>
+        </div>
+      </div>
+    </div>-->
+    <script>
+      document.onkeydown = function (t) {if(t.which == 9) return false;}
+    </script>
+    <script src="/__/firebase/8.2.4/firebase-app.js"></script>
+    <script src="/__/firebase/8.2.4/firebase-auth.js"></script>
+    <script src="/__/firebase/8.2.4/firebase-storage.js"></script>
+    <script src="/__/firebase/8.2.4/firebase-firestore.js"></script>
+    <script src="/__/firebase/8.2.4/firebase-database.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script src="scripts/teacher.js"></script>
+
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--table2excel-->
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+  </body>
+</html>
