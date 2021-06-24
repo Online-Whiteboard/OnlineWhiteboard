@@ -2,7 +2,7 @@
 To try the site : https://onlinewhiteboard-b184f.firebaseapp.com
 
 
-*************
+## Description
 OnlineWhiteboard is a simple tool to teach students instantly by creating a virtual class and 
 make students join that class by sharing the auto-generated class code. 
 This web application allows faculty and students at remote places to easily interact with each other. 
@@ -24,19 +24,21 @@ application. The students will be permitted to join the class only if their mail
 ‘Manage students’ section of the respective class. Student can start learning by selecting the 'Start
 learning' option. When the teacher sends an attendance notification, a popup will be displayed on
 the student's devices asking them to give the response to the notification within 30 seconds.
-*************
 
-#Follow these steps to modify and test the project:
-Step 1:
-  Open the firebase console at https://console.firebase.google.com/
-  create a new project.
-  Enable Google signin in **Firebase Authentication**.
-  Create databases in both **Firestore Database** and **Realtime Database** in test mode.
-Step 2:
-  Make sure that you have installed [node.js](https://nodejs.org/en/) and has good internet connection.
-  Run _npm install -g firebase-tools_
-  Run _firebase login_
-  Change the working directory to the directory where firebase.json file exists.
-  Run _firebase use --add_
-  select the project id that you have created in step 1 and give it an alias.
-  Run _firebase deploy_
+## Follow these steps to modify and test the project
+### Step 1:
+* Open the [firebase console](https://console.firebase.google.com/).
+* create a new project.
+* Enable Google signin in **Firebase Authentication**.
+* Create databases in both **Firestore Database** and **Realtime Database** in test mode.
+### Step 2:
+* Make sure that you have installed [node.js](https://nodejs.org/en/) and has good internet connection.
+* Run this command to install **Firebase CLI**.
+```npm install -g firebase-tools```
+* Run this command to login to **Firebase CLI** using your firebase account.
+```firebase login```
+* Change the working directory to the directory where **_firebase.json_** file exists.
+* Run this command to select the project id that you have created in step 1 and give it an alias.
+```firebase use --add```
+* Run this command to deploy the site.
+```firebase deploy```
