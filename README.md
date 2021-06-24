@@ -1,6 +1,7 @@
 # Online-Whiteboard
 To try the site : https://onlinewhiteboard-b184f.firebaseapp.com
 
+
 *************
 OnlineWhiteboard is a simple tool to teach students instantly by creating a virtual class and 
 make students join that class by sharing the auto-generated class code. 
@@ -25,3 +26,17 @@ learning' option. When the teacher sends an attendance notification, a popup wil
 the student's devices asking them to give the response to the notification within 30 seconds.
 *************
 
+#Follow these steps to modify and test the project:
+Step 1:
+  Open the firebase console at https://console.firebase.google.com/
+  create a new project.
+  Enable Google signin in **Firebase Authentication**.
+  Create databases in both **Firestore Database** and **Realtime Database** in test mode.
+Step 2:
+  Make sure that you have installed [node.js](https://nodejs.org/en/) and has good internet connection.
+  Run _npm install -g firebase-tools_
+  Run _firebase login_
+  Change the working directory to the directory where firebase.json file exists.
+  Run _firebase use --add_
+  select the project id that you have created in step 1 and give it an alias.
+  Run _firebase deploy_
