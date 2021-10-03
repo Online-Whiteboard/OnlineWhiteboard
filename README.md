@@ -1,4 +1,4 @@
-# Online-Whiteboard
+# OnlineWhiteboard
 To try the site : https://onlinewhiteboard-b184f.firebaseapp.com
 
 
